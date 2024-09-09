@@ -16,7 +16,7 @@ namespace LoginApi.Services
 
 		public async Task CreateUser(User user)
 		{
-			var existingUser = await repository.GetItem<User>(x => x.Where(x => x.Id == user.Id))!;
+			var existingUser = await repository.GetItem<User>(x => x.Where(x => x.Username == user.Username))!;
 			if (existingUser == null)
 				await repository.AddItem(user);
 		}
