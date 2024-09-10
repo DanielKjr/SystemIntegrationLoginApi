@@ -1,7 +1,6 @@
 ﻿using DK.GenericLibrary.Interfaces;
 using LoginApi.Context;
 using LoginApi.Models;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
