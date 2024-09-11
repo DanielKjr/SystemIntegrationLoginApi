@@ -1,17 +1,24 @@
+
 services:
   loginapi:
-    image: ${DOCKER_REGISTRY-}loginapi
+    image: loginapi
+    build:
+      context: LoginApi
+      dockerfile: Dockerfile
     ports:
-    - "7000:80"
-    - "7001:443"
-    build:
-      dockerfile: LoginAPI/Dockerfile
+      - "7000:8080"
+      - "7001:8081"
+    volumes:
+    - ./LoginApi/users.db:/app/users.db
   gameserverapi:
-    image: ${DOCKER_REGISTRY-}gameserverapi
+    image: gameserverapi
     build:
-      dockerfile: GameserverAPI/Dockerfile
+      context: GameServerAPI
+      dockerfile: Dockerfile
+
   sessionapi:
-    image: ${DOCKER_REGISTRY-}sessionapi
+    image: sessionapi
     build:
-      dockerfile: SessionAPI/Dockerfile
- 
+      context: SessionAPI
+      dockerfile: Dockerfile
+
