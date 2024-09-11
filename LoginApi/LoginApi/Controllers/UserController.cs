@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LoginApi.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	public class UserController(UserService _userService, IConfiguration configuration) : ControllerBase
 	{
 
@@ -36,7 +36,7 @@ namespace LoginApi.Controllers
 
 		[HttpPost]
 		[Route("login")]
-		public async Task<string> Login([FromBody] User user)
+		public async Task<string> Login([FromBody]UserDTO user)
 		{
 			return await _userService.Login(user);
 		}

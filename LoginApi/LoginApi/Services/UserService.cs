@@ -21,9 +21,9 @@ namespace LoginApi.Services
 		}
 
 
-		public async Task<string> Login(User user)
+		public async Task<string> Login(UserDTO user)
 		{
-			var existingUser = await repository.GetItem<User>(x => x.Where(x => x.Id == user.Id))!;
+			var existingUser = await repository.GetItem<User>(x => x.Where(x => x.Username == user.Username))!;
 			if (existingUser != null)
 			{
 				if (BCrypt.Net.BCrypt.Verify(user.Password, existingUser.Password))
