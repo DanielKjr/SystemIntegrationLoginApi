@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GameserverAPI.Controllers
 {
-	[Route("api/v1/[controller]")]
+	[Route("v1/[controller]")]
 	public class GameserverController : ControllerBase
 	{
 
@@ -14,7 +14,12 @@ namespace GameserverAPI.Controllers
 			_gameserverService = gameserverService;
 		}
 
-		
+		[HttpPost]
+		[Route("verify/{jwt}")]
+		public Task<string> VerifyJWT(string jwt)
+		{
+			return _gameserverService.VerifyJWT(jwt);
+		}
 
 	}
 }

@@ -2,6 +2,10 @@
 services:
   loginapi:
     image: loginapi
+    environment:
+     - secretPath=/run/secrets/jwtSecret
+    secrets:
+     - jwtSecret
     build:
       context: LoginApi
       dockerfile: Dockerfile
@@ -10,11 +14,19 @@ services:
       - "7001:8081"
     volumes:
     - ./LoginApi/users.db:/app/users.db
+
   gameserverapi:
     image: gameserverapi
+    environment:
+     - secretPath=/run/secrets/jwtSecret 
+    secrets:
+     - jwtSecret
     build:
       context: GameServerAPI
       dockerfile: Dockerfile
+    ports:
+      - "7002:8080"
+      - "7003:8081"
 
   sessionapi:
     image: sessionapi
@@ -22,3 +34,7 @@ services:
       context: SessionAPI
       dockerfile: Dockerfile
 
+
+secrets:
+  jwtSecret:
+   file: ./secret.txt

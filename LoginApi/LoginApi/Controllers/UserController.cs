@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LoginApi.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
 	public class UserController(UserService _userService, IConfiguration configuration) : ControllerBase
 	{
 
@@ -36,7 +36,7 @@ namespace LoginApi.Controllers
 
 		[HttpPost]
 		[Route("login")]
-		public async Task<string> Login([FromBody]UserDTO user)
+		public async Task<string> Login([FromBody] UserDTO user)
 		{
 			return await _userService.Login(user);
 		}
@@ -51,7 +51,13 @@ namespace LoginApi.Controllers
 				new Claim(ClaimTypes.Name, user.Username)
 			};
 
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value!));
+			var secret = Environment.GetEnvironmentVariable("secrets/jwtSecret");
+			string secretValue;
+			if (secret != null)
+			{
+				secretValue = System.IO.File.ReadAllText(secret); 
+			}
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
 
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
