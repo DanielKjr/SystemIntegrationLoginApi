@@ -17,21 +17,22 @@ builder.Services.AddTransient(typeof(IAsyncRepository<>), typeof(AsyncRepository
 builder.Services.AddDbContextFactory<UserContext>();
 
 
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
 	var services = scope.ServiceProvider;
 	var context = services.GetRequiredService<UserContext>();
+
 	context.Database.EnsureCreated();
 }
 
 	// Configure the HTTP request pipeline.
-	if (app.Environment.IsDevelopment())
-	{
+	
 		app.UseSwagger();
 		app.UseSwaggerUI();
-	}
+	
 
 app.UseHttpsRedirection();
 

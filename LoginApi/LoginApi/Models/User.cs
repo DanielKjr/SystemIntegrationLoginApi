@@ -1,4 +1,6 @@
-﻿namespace LoginApi.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace LoginApi.Models
 {
 	public class User
 	{

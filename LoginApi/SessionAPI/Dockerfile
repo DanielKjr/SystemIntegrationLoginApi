@@ -4,18 +4,19 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-#EXPOSE 8080
-#EXPOSE 8081
+EXPOSE 8080
+EXPOSE 8081
 
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SessionAPI/SessionAPI.csproj", "SessionAPI/"]
-RUN dotnet restore "./SessionAPI/SessionAPI.csproj"
-COPY . .
+COPY ["SessionAPI.csproj", "SessionAPI/"]
+RUN dotnet restore "SessionAPI/SessionAPI.csproj"
+
 WORKDIR "/src/SessionAPI"
+COPY . .
 RUN dotnet build "./SessionAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
