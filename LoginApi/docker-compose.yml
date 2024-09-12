@@ -40,6 +40,7 @@ services:
     - "7004:8080"
     - "7005:8081"
 
+
   sessionapi:
     image: sessionapi
     container_name: sessionapi

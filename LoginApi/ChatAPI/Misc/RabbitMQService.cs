@@ -12,7 +12,8 @@ namespace ChatAPI.Misc
 
 		public RabbitMQService()
 		{
-			var factory = new ConnectionFactory() { HostName = "localhost" };
+			//name from the compose file 
+			var factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 5672 };
 			_connection = factory.CreateConnection();
 			_channel = _connection.CreateModel();
 
