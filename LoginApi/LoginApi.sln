@@ -5,11 +5,13 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoginApi", "LoginApi\LoginApi.csproj", "{A797BAC6-44AD-44F6-A233-9BCCC7ECD7CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SessionAPI", "SessionAPI\SessionAPI.csproj", "{DDE0A5C6-4B92-4D81-8B29-1BDFA6481A36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SessionAPI", "SessionAPI\SessionAPI.csproj", "{DDE0A5C6-4B92-4D81-8B29-1BDFA6481A36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameserverAPI", "GameserverAPI\GameserverAPI.csproj", "{E79DB93E-C629-4C26-8778-EE8724E49947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameserverAPI", "GameserverAPI\GameserverAPI.csproj", "{E79DB93E-C629-4C26-8778-EE8724E49947}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{404E707A-05F8-43DF-8755-C7B84916E26B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAPI", "ChatAPI\ChatAPI.csproj", "{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{404E707A-05F8-43DF-8755-C7B84916E26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{404E707A-05F8-43DF-8755-C7B84916E26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{404E707A-05F8-43DF-8755-C7B84916E26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

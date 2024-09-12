@@ -28,6 +28,15 @@ services:
       - "7002:8080"
       - "7003:8081"
 
+  chatapi:
+    image: chatapi
+    build: 
+     context: ChatAPI
+     dockerfile: Dockerfile
+    ports:
+    - "7004:8080"
+    - "7005:8081"
+
   sessionapi:
     image: sessionapi
     build:
