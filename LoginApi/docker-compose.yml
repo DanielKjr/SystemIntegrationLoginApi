@@ -2,6 +2,7 @@
 services:
   loginapi:
     image: loginapi
+    container_name: loginapi
     environment:
      - secretPath=/run/secrets/jwtSecret
     secrets:
@@ -17,6 +18,7 @@ services:
 
   gameserverapi:
     image: gameserverapi
+    container_name: gameserverapi
     environment:
      - secretPath=/run/secrets/jwtSecret 
     secrets:
@@ -28,12 +30,34 @@ services:
       - "7002:8080"
       - "7003:8081"
 
+  chatapi:
+    image: chatapi
+    container_name: chatapi
+    build: 
+     context: ChatAPI
+     dockerfile: Dockerfile
+    ports:
+    - "7004:8080"
+    - "7005:8081"
+
+
   sessionapi:
     image: sessionapi
+    container_name: sessionapi
     build:
       context: SessionAPI
       dockerfile: Dockerfile
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+volumes:
+  rabbitmq_data:
 
 secrets:
   jwtSecret:
