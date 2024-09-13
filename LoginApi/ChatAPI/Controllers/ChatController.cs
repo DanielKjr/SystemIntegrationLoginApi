@@ -1,5 +1,6 @@
 ﻿using ChatAPI.Misc;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ChatAPI.Controllers
 {
@@ -12,26 +13,47 @@ namespace ChatAPI.Controllers
 		public IActionResult GetChatHistory(string chatType)
 		{
 			// Fetch chat history from database or message store
+			
 			return Ok(new { messages = new string[] { "Welcome!", "Hello there!" } });
 		}
 
 
-		[HttpPost("{chatType}/send")]
-		public IActionResult SendMessage(string chatType, [FromBody] string message)
+		[HttpPost("sendGlobal")]
+		public IActionResult SendGlobalMessage([FromBody] string message)
 		{
 			// Determine the queue based on the chat type (global, private, party)
-			string queueName = GetQueueName(chatType);
-
-			if (queueName == null)
-			{
-				return BadRequest("Invalid chat type.");
-			}
+			
 
 			// Send message to RabbitMQ queue
-			_rabbitMQService.SendMessageToQueue(queueName, message);
+			_rabbitMQService.SendGlobalMessage("global_chat", message);
 
-			return Ok(new { Status = "Message sent", ChatType = chatType, Message = message });
+			return Ok(new { Status = "Message sent", ChatType = "global_chat", Message = message });
 		}
+
+
+		[HttpPost("sendPrivate/{targetUser}")]
+		public IActionResult SendPrivateMessage(string targetUser, [FromBody] string message)
+		{
+			//Sends a private message to a specific user
+			string queueName = "private_chat."+targetUser;
+			_rabbitMQService.SendGlobalMessage(queueName, message);
+
+			return Ok(new { Status = "Message sent", ChatType = queueName, Message = message });
+		}
+
+
+		[HttpPost("sendParty/{partyId}")]
+		public IActionResult SendPartyMessage(string partyId, [FromBody] string message)
+		{
+			string queueName = "party_chat." + partyId;
+
+			// Send message to RabbitMQ queue
+			_rabbitMQService.SendGlobalMessage(queueName, message);
+
+			return Ok(new { Status = "Message sent", ChatType = queueName, Message = message });
+		}
+
+
 
 		private string GetQueueName(string chatType)
 		{
