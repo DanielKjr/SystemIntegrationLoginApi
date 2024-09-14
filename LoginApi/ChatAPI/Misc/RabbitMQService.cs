@@ -10,7 +10,7 @@ namespace ChatAPI.Misc
 	{
 	
 
-		public void SendGlobalMessage(string queueName, string message)
+		public void SendMessage(string queueName, string message)
 		{	
 			//Usings instead of reference because if left as transient it will create a 
 			//new connection every time, BUT also keep it alive for some reason.

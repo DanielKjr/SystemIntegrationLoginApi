@@ -14,11 +14,6 @@ namespace GameserverAPI.Services
 		private List<int> freeServerPorts = new List<int> { 27015, 27016, 27017, 27018, 27019, 27020 };
 		
 
-		public GameserverService()
-		{
-
-		}
-
 
 		public Task<string> VerifyJWT(string jwt)
 		{
@@ -30,7 +25,7 @@ namespace GameserverAPI.Services
 			
 
 
-			var secretValue = System.IO.File.ReadAllText(secretPath);
+			var secretValue = System.IO.File.ReadAllText(secretPath!);
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretValue!));
 
 			var tokenHandler = new JwtSecurityTokenHandler();
@@ -64,7 +59,6 @@ namespace GameserverAPI.Services
 				Console.WriteLine($"Token validation failed: {ex.Message}");
 				return Task.FromResult("Failed");
 			}
-			
 		}
 	}
 }

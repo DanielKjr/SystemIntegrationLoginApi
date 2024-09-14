@@ -10,7 +10,7 @@ using System.Text;
 namespace LoginApi.Controllers
 {
 	[Route("api/[controller]")]
-	public class UserController(UserService _userService, IConfiguration configuration) : ControllerBase
+	public class UserController(UserService _userService) : ControllerBase
 	{
 
 
@@ -54,32 +54,5 @@ namespace LoginApi.Controllers
 			await _userService.DeleteAll();
 		}
 
-
-		private string CreateToken(User user)
-		{
-			List<Claim> claims = new List<Claim>
-			{
-				new Claim(ClaimTypes.Name, user.Username)
-			};
-
-			var secret = Environment.GetEnvironmentVariable("secrets/jwtSecret");
-			string secretValue;
-			if (secret != null)
-			{
-				secretValue = System.IO.File.ReadAllText(secret); 
-			}
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
-
-			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-			var token = new JwtSecurityToken(
-				claims: claims,
-				expires: DateTime.Now.AddHours(5),
-				signingCredentials: creds
-				);
-
-			var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-			return jwt;
-		}
 	}
 }

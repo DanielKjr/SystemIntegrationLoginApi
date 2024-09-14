@@ -10,7 +10,7 @@ using System.Text;
 
 namespace LoginApi.Services
 {
-	public class UserService(IAsyncRepository<UserContext> repository, IConfiguration configuration)
+	public class UserService(IAsyncRepository<UserContext> repository)
 	{
 
 		public async Task CreateUser(User user)
@@ -69,7 +69,7 @@ namespace LoginApi.Services
 				Console.WriteLine("Secret path is not set or file does not exist");
 			}
 
-			var secretValue = System.IO.File.ReadAllText(secretPath);
+			var secretValue = System.IO.File.ReadAllText(secretPath!);
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretValue!));
 
