@@ -41,6 +41,7 @@ services:
     - "7005:8081"
     depends_on:
     - rabbitmq
+  
 
   sessionapi:
     image: sessionapi

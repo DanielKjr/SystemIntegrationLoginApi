@@ -1,3 +1,4 @@
+using GameserverAPI.Misc;
 using GameserverAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<GameserverService>();
+//builder.Services.AddSingleton<IStorage, DictionaryStorage>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -40,8 +40,19 @@ namespace LoginApi.Controllers
 		{
 			return await _userService.Login(user);
 		}
-		//TODO tutorial gør det her fordi controllerbase har Ok men min funktioner er i service
+		
 
+		[HttpDelete("delete/{id}")]
+		public async Task DeleteUser(Guid id)
+		{
+			await _userService.DeleteUser(id);
+		}
+
+		[HttpDelete("delete/all")]
+		public async Task DeleteAll()
+		{
+			await _userService.DeleteAll();
+		}
 
 
 		private string CreateToken(User user)

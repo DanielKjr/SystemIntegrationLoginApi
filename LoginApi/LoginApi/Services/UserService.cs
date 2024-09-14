@@ -44,26 +44,16 @@ namespace LoginApi.Services
 			return await repository.GetAllItems<User>();
 		}
 
-		//private string CreateToken(User user)
-		//{
-		//	List<Claim> claims = new List<Claim>
-		//	{
-		//		new Claim(ClaimTypes.Name, user.Username)
-		//	};
 
-		//	var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AppSettings:Token"]!));
+		public async Task DeleteUser(Guid id)
+		{
+			await repository.RemoveItem<User>(x => x.Id == id);
+		}
 
-		//	var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-		//	var token = new JwtSecurityToken(
-		//		claims: claims,
-		//		expires: DateTime.Now.AddHours(5),
-		//		signingCredentials: creds
-		//		);
-
-		//	var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-		//	return jwt;
-		//}
+		public async Task DeleteAll()
+		{
+			await repository.RemoveItems<User>(x => x.Where(z => z.Username != string.Empty));
+		}
 
 		private string CreateToken(User user)
 		{

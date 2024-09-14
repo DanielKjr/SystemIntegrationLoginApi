@@ -21,9 +21,6 @@ namespace ChatAPI.Controllers
 		[HttpPost("sendGlobal")]
 		public IActionResult SendGlobalMessage([FromBody] string message)
 		{
-			// Determine the queue based on the chat type (global, private, party)
-			
-
 			// Send message to RabbitMQ queue
 			_rabbitMQService.SendGlobalMessage("global_chat", message);
 
@@ -54,7 +51,7 @@ namespace ChatAPI.Controllers
 		}
 
 
-
+		//not used as I just made a api call for each type
 		private string GetQueueName(string chatType)
 		{
 			switch (chatType.ToLower())
