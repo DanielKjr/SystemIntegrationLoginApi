@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameserverAPI", "Gameserver
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{404E707A-05F8-43DF-8755-C7B84916E26B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAPI", "ChatAPI\ChatAPI.csproj", "{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatAPI", "ChatAPI\ChatAPI.csproj", "{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatFeatures", "ChatFeatures\ChatFeatures.csproj", "{98C2ABB7-6126-44AB-B8D2-0DBF8CDCBB1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63EBBBF6-8468-4E6B-890E-D87CF3440DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98C2ABB7-6126-44AB-B8D2-0DBF8CDCBB1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98C2ABB7-6126-44AB-B8D2-0DBF8CDCBB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C2ABB7-6126-44AB-B8D2-0DBF8CDCBB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98C2ABB7-6126-44AB-B8D2-0DBF8CDCBB1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
