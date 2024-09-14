@@ -78,7 +78,8 @@ namespace LoginApi.Services
 			var token = new JwtSecurityToken(
 				claims: claims,
 				expires: DateTime.Now.AddHours(5),
-				signingCredentials: creds
+				signingCredentials: creds,
+				issuer: "http://loginapi"
 				);
 
 			var jwt = new JwtSecurityTokenHandler().WriteToken(token);

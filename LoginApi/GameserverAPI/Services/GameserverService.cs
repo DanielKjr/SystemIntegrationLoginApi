@@ -12,6 +12,7 @@ namespace GameserverAPI.Services
 	{
 
 		private List<int> freeServerPorts = new List<int> { 27015, 27016, 27017, 27018, 27019, 27020 };
+		
 
 		public GameserverService()
 		{
@@ -21,10 +22,6 @@ namespace GameserverAPI.Services
 
 		public Task<string> VerifyJWT(string jwt)
 		{
-			var valid = false;
-			//var token = new JwtSecurityTokenHandler().ReadJwtToken(jwt);
-
-			
 			var secretPath = Environment.GetEnvironmentVariable("secretPath");
 			if (string.IsNullOrEmpty(secretPath) || !System.IO.File.Exists(secretPath))
 			{
@@ -35,18 +32,16 @@ namespace GameserverAPI.Services
 
 			var secretValue = System.IO.File.ReadAllText(secretPath);
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretValue!));
-			//something to verify it is valid?
-			//var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value!));
 
-			//var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var validationParameters = new TokenValidationParameters
 			{
-				ValidateIssuer = false,           // Skip validation of the token's issuer
+				ValidateIssuer = true,           // Skip validation of the token's issuer
 				ValidateAudience = false,         // Skip validation of the token's audience
 				ValidateLifetime = true,          // Ensure the token has not expired
 				ValidateIssuerSigningKey = true,  // Validate the signing key
-				IssuerSigningKey = key            // Provide the shared secret key for validation
+				IssuerSigningKey = key, // Provide the shared secret key for validation
+				ValidIssuers = new[] { "http://loginapi" }  // valid issuer, should be hidden of course
 			};
 
 			try
@@ -56,12 +51,12 @@ namespace GameserverAPI.Services
 
 				// You can access token properties like claims and expiration here
 				var jwtToken = (JwtSecurityToken)validatedToken;
+				
 
 				// If needed, check specific claims or other token properties manually
 				var usernameClaim = principal.FindFirst(ClaimTypes.Name)?.Value;
-				Console.WriteLine($"Username: {usernameClaim}");
 
-				return Task.FromResult("Something");
+				return Task.FromResult("Registration Succeeded");
 			}
 			catch (SecurityTokenException ex)
 			{
@@ -69,10 +64,7 @@ namespace GameserverAPI.Services
 				Console.WriteLine($"Token validation failed: {ex.Message}");
 				return Task.FromResult("Failed");
 			}
-			if (valid)
-				return Task.FromResult("some serverport");
-			else
-				return Task<string>.FromResult("invalid");
+			
 		}
 	}
 }

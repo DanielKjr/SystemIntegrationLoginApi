@@ -16,9 +16,9 @@ namespace GameserverAPI.Controllers
 
 		[HttpPost]
 		[Route("verify/{jwt}")]
-		public Task<string> VerifyJWT(string jwt)
+		public IActionResult VerifyJWT(string jwt)
 		{
-			return _gameserverService.VerifyJWT(jwt);
+			return Ok(_gameserverService.VerifyJWT(jwt));
 		}
 
 	}
