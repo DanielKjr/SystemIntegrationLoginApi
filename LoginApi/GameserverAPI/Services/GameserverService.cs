@@ -23,16 +23,14 @@ namespace GameserverAPI.Services
 				Console.WriteLine("Secret path is not set or file does not exist");
 			}
 			
-
-
 			var secretValue = System.IO.File.ReadAllText(secretPath!);
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretValue!));
 
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var validationParameters = new TokenValidationParameters
 			{
-				ValidateIssuer = true,           // Skip validation of the token's issuer
-				ValidateAudience = false,         // Skip validation of the token's audience
+				ValidateIssuer = true,          
+				ValidateAudience = false,        
 				ValidateLifetime = true,          // Ensure the token has not expired
 				ValidateIssuerSigningKey = true,  // Validate the signing key
 				IssuerSigningKey = key, // Provide the shared secret key for validation
@@ -46,12 +44,6 @@ namespace GameserverAPI.Services
 
 				// You can access token properties like claims and expiration here
 				var jwtToken = (JwtSecurityToken)validatedToken;
-				
-
-				// If needed, check specific claims or other token properties manually
-				var usernameClaim = principal.FindFirst(ClaimTypes.Name)?.Value;
-
-                //return Task.FromResult("Registration Succeeded");
                 return Task.FromResult("7777");
             }
 			catch (SecurityTokenException ex)

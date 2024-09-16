@@ -64,8 +64,6 @@ void PrivateChatConsumer2(string username)
 	using (var connection = factory.CreateConnection())
 	using (var channel = connection.CreateModel())
 	{
-
-		
 		// Declare the topic exchange
 		string exchangeName = "private_chat";
 		channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Direct);
@@ -109,8 +107,7 @@ void PrivateChatConsumer2(string username)
 
 				channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 			}
-			//var queue
-			//channel.BasicConsume(queue: replyQueue, autoAck: false, consumer: consumer);
+
 		};
 
 		// Start consuming messages from the queue

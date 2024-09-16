@@ -34,8 +34,6 @@ namespace LoginApi.Services
 			else
 				return "Username or password is incorrect.";
 
-
-
 		}
 
 
@@ -47,6 +45,7 @@ namespace LoginApi.Services
 
 		public async Task DeleteUser(Guid id)
 		{
+			
 			await repository.RemoveItem<User>(x => x.Id == id);
 		}
 
@@ -62,17 +61,13 @@ namespace LoginApi.Services
 				new Claim(ClaimTypes.Name, user.Username)
 			};
 
-
 			var secretPath = Environment.GetEnvironmentVariable("secretPath");
 			if (string.IsNullOrEmpty(secretPath) || !System.IO.File.Exists(secretPath))
 			{
 				Console.WriteLine("Secret path is not set or file does not exist");
 			}
-
 			var secretValue = System.IO.File.ReadAllText(secretPath!);
-
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretValue!));
-
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
 			var token = new JwtSecurityToken(

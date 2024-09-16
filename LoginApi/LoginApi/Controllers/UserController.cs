@@ -17,12 +17,15 @@ namespace LoginApi.Controllers
 
 		[HttpPost]
 		[Route("new")]
-		public async Task AddUser([FromBody] User user)
+		public async Task AddUser([FromBody]UserDTO user)
 		{
-			var userPw = user.Password;
-			var userPwHash = BCrypt.Net.BCrypt.HashPassword(userPw);
-			user.Password = userPwHash;
-			await _userService.CreateUser(user);
+			var newUser = new User()
+			{
+				Username = user.Username,
+				Password = BCrypt.Net.BCrypt.HashPassword(user.Password)
+			};
+			await _userService.CreateUser(newUser);
+			
 		}
 
 
