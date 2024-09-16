@@ -51,8 +51,9 @@ namespace GameserverAPI.Services
 				// If needed, check specific claims or other token properties manually
 				var usernameClaim = principal.FindFirst(ClaimTypes.Name)?.Value;
 
-				return Task.FromResult("Registration Succeeded");
-			}
+                //return Task.FromResult("Registration Succeeded");
+                return Task.FromResult("7777");
+            }
 			catch (SecurityTokenException ex)
 			{
 				// Token validation failed
